@@ -1,0 +1,24 @@
+steps:
+  # Step 1: Use Docker Cloud Builder to build the image
+  - name: "gcr.io/cloud-builders/docker"
+    args: [
+      "build", 
+      "-t", 
+      "us-central1-docker.pkg.dev/utility-binder-434801-u8/monthol-100957691/todoapp:$COMMIT_SHA", 
+      "."
+    ]
+    
+  # Step 2: Push the Docker image to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: [
+      "push", 
+      "us-central1-docker.pkg.dev/utility-binder-434801-u8/monthol-100957691/todoapp:$COMMIT_SHA"
+    ]
+
+# Substitutions allow you to define variables like the commit SHA
+substitutions:
+  _COMMIT_SHA: $BUILD_ID  # This represents the commit SHA automatically provided in Cloud Build
+
+# Options for the Cloud Build setup
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
