@@ -22,4 +22,3 @@ substitutions:
 # Options for the Cloud Build setup
 options:
   defaultLogsBucketBehavior: CLOUD_LOGGING_ONLY
-
