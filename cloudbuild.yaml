@@ -15,6 +15,17 @@ steps:
       "us-central1-docker.pkg.dev/utility-binder-434801-u8/monthol-100957691/todoapp:$COMMIT_SHA"
     ]
 
+  # Step 3: Deploy to Google Cloud Run using the Cloud SDK
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"  # Google Cloud SDK image
+    entrypoint: "gcloud"
+    args: [
+      "run", "deploy", "todoapp",  # Cloud Run service name
+      "--image", "us-central1-docker.pkg.dev/utility-binder-434801-u8/monthol-100957691/todoapp:$COMMIT_SHA",
+      "--region", "us-central1",
+      "--platform", "managed",
+      "--allow-unauthenticated"  # Flag un-restrict access
+    ]
+
 # Substitutions allow you to define variables like the commit SHA
 substitutions:
   _COMMIT_SHA: $BUILD_ID  # This represents the commit SHA automatically provided in Cloud Build
