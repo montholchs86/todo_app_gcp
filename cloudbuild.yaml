@@ -22,5 +22,4 @@ substitutions:
 # Options for the Cloud Build setup
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-  logsBucket: "gs://monthol-100957691-logs"
 
